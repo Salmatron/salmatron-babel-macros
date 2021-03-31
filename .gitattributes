@@ -1,0 +1,107 @@
+# Set default behavior to automatically normalize line endings.
+* text=auto eol=lf
+
+# Force batch scripts to always use CRLF line endings so that if a repo is accessed
+# in Windows via a file share from Linux, the scripts will work.
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
+
+# Denote all files that are truly binary and should not be modified.
+
+# Images
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.webp binary
+*.bmp binary
+*.gif binary
+*.psd binary
+*.psb binary
+*.ai binary
+*.eps binary
+*.ico binary
+*.tif binary
+*.tiff binary
+*.raw binary
+
+
+# Documents
+*.pdf binary
+*.chm binary
+*.epub binary
+*.mobi binary
+*.rtf binary
+*.doc binary
+*.odt binary
+*.docx binary
+*.xls binary
+*.ods binary
+*.xlsx binary
+*.ppt binary
+*.odp binary
+*.pptx binary
+
+
+# Fonts
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.eot binary
+
+# Archives
+*.7z binary
+*.br binary
+*.gz binary
+*.tgz binary
+*.svgz binary
+*.bz2 binary
+*.tar binary
+*.zip binary
+*.cab binary
+*.rar binary
+*.iso binary
+*.bin binary
+*.phar binary
+*.jar binary
+*.war binary
+
+# Packages
+*.deb binary
+*.rpm binary
+*.snap binary
+*.flatpak binary
+
+# Multimedia
+
+*.mp4 binary
+*.m4v binary
+*.mpg binary
+*.mpeg binary
+*.mov binary
+*.mpv binary
+*.gifv binary
+*.mkv binary
+*.webm binary
+*.wmv binary
+*.avi binary
+
+*.mp3 binary
+*.m4a binary
+*.m4p binary
+*.ogg binary
+*.aac binary
+*.wav binary
+*.flac binary
+
+
+# Misc
+*.class binary
+*.dll binary
+*.ear binary
+*.so  binary
+*.jks binary
+*.exe binary
+*.msi binary
+*.sys binary
+*.dat binary
