@@ -1,8 +1,9 @@
-// ast-pretty-print is really handy :)
-const printAST = require('ast-pretty-print')
-const {createMacro} = require('babel-macros')
+const {createMacro} = require('babel-macros');
 
-module.exports = createMacro(nameofMacro)
+// ast-pretty-print is really handy :)
+// const printAST = require('ast-pretty-print')
+
+module.exports = createMacro(nameofMacro);
 
 function nameofMacro({ references, babel }) {
   const nameofRefs = references.nameof;
@@ -14,21 +15,37 @@ function nameofMacro({ references, babel }) {
   nameofRefs.forEach(reference => {
     const {parentPath} = reference;
 
-
     if (parentPath.type === 'CallExpression') {
+      /** @type {import("@babel/traverse").NodePath} */
       const arg = parentPath.get('arguments')[0];
 
-      const evaluated = arg.evaluate();
+      if ((arg.type === 'ObjectExpression') && arg.node) {
+        /** @type {import("@babel/traverse").Node} */
+        const node = arg.node;
 
-      const value = evaluated.value;
-      const deopt = evaluated.deopt;
+        if (node.type === 'ObjectExpression') {
+          /** @type {import("@babel/traverse").Node[]} */
+          const properties = node.properties;
 
-      if ((typeof value === 'object') && value) {
-        parentPath.replaceWith(babel.types.stringLiteral(Object.keys(value)[0]));
-      } else if (deopt && deopt.container && deopt.container.key.name) {
-        parentPath.replaceWith(babel.types.stringLiteral(deopt.container.key.name));
+          if (properties?.length === 1) {
+            /** @type {import("@babel/traverse").Node} */
+            const property = properties[0];
+
+            if (property.type === 'ObjectProperty') {
+              /** @type {import("@babel/traverse").Node} */
+              const keyNode = property.key;
+
+              if (keyNode && (keyNode.type === 'Identifier')) {
+                const keyName = keyNode.name;
+
+                if (keyName && (typeof keyName === 'string')) {
+                  parentPath.replaceWith(babel.types.stringLiteral(keyName));
+                }
+              }
+            }
+          }
+        }
       }
-
     }
   });
 }
